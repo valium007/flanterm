@@ -4,9 +4,9 @@ version = 4
 
 [[package]]
 name = "cc"
-version = "1.2.13"
+version = "1.2.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c7777341816418c02e033934a09f20dc0ccaf65a5201ef8a450ae0105a573fda"
+checksum = "8e3a13707ac958681c13b39b458c073d0d9bc8a22cb1b2f4c8e55eb72c13f362"
 dependencies = [
  "shlex",
 ]
@@ -22,7 +22,7 @@ dependencies = [
 [[package]]
 name = "limone"
 version = "0.0.5"
-source = "git+https://github.com/piuma-os/limone#5e80c360a46f6270d819161156c57d8f3fd3bb27"
+source = "git+https://github.com/piuma-os/limone#25b3c4fd00464fef5ad00c189d4919d042a45e57"
 
 [[package]]
 name = "shlex"
