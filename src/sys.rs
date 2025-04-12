@@ -104,7 +104,6 @@ pub const __bool_true_false_are_defined: u32 = 1;
 pub const true_: u32 = 1;
 pub const false_: u32 = 0;
 pub const FLANTERM_H: u32 = 1;
-pub const FLANTERM_MAX_ESC_VALUES: u32 = 16;
 pub const FLANTERM_CB_DEC: u32 = 10;
 pub const FLANTERM_CB_BELL: u32 = 20;
 pub const FLANTERM_CB_PRIVATE_ID: u32 = 30;
@@ -121,7 +120,6 @@ pub const FLANTERM_OOB_OUTPUT_ONLCR: u32 = 16;
 pub const FLANTERM_OOB_OUTPUT_ONLRET: u32 = 32;
 pub const FLANTERM_OOB_OUTPUT_ONOCR: u32 = 64;
 pub const FLANTERM_OOB_OUTPUT_OPOST: u32 = 128;
-pub const FLANTERM_FB_FONT_GLYPHS: u32 = 256;
 pub type __u_char = ::core::ffi::c_uchar;
 pub type __u_short = ::core::ffi::c_ushort;
 pub type __u_int = ::core::ffi::c_uint;
@@ -234,240 +232,7 @@ const _: () = {
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct flanterm_context {
-    pub tab_size: usize,
-    pub autoflush: bool,
-    pub cursor_enabled: bool,
-    pub scroll_enabled: bool,
-    pub control_sequence: bool,
-    pub escape: bool,
-    pub osc: bool,
-    pub osc_escape: bool,
-    pub rrr: bool,
-    pub discard_next: bool,
-    pub bold: bool,
-    pub bg_bold: bool,
-    pub reverse_video: bool,
-    pub dec_private: bool,
-    pub insert_mode: bool,
-    pub code_point: u64,
-    pub unicode_remaining: usize,
-    pub g_select: u8,
-    pub charsets: [u8; 2usize],
-    pub current_charset: usize,
-    pub escape_offset: usize,
-    pub esc_values_i: usize,
-    pub saved_cursor_x: usize,
-    pub saved_cursor_y: usize,
-    pub current_primary: usize,
-    pub current_bg: usize,
-    pub scroll_top_margin: usize,
-    pub scroll_bottom_margin: usize,
-    pub esc_values: [u32; 16usize],
-    pub oob_output: u64,
-    pub saved_state_bold: bool,
-    pub saved_state_bg_bold: bool,
-    pub saved_state_reverse_video: bool,
-    pub saved_state_current_charset: usize,
-    pub saved_state_current_primary: usize,
-    pub saved_state_current_bg: usize,
-    pub rows: usize,
-    pub cols: usize,
-    pub raw_putchar:
-        ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context, c: u8)>,
-    pub clear:
-        ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context, move_: bool)>,
-    pub set_cursor_pos: ::core::option::Option<
-        unsafe extern "C" fn(arg1: *mut flanterm_context, x: usize, y: usize),
-    >,
-    pub get_cursor_pos: ::core::option::Option<
-        unsafe extern "C" fn(arg1: *mut flanterm_context, x: *mut usize, y: *mut usize),
-    >,
-    pub set_text_fg:
-        ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context, fg: usize)>,
-    pub set_text_bg:
-        ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context, bg: usize)>,
-    pub set_text_fg_bright:
-        ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context, fg: usize)>,
-    pub set_text_bg_bright:
-        ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context, bg: usize)>,
-    pub set_text_fg_rgb:
-        ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context, fg: u32)>,
-    pub set_text_bg_rgb:
-        ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context, bg: u32)>,
-    pub set_text_fg_default:
-        ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context)>,
-    pub set_text_bg_default:
-        ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context)>,
-    pub set_text_fg_default_bright:
-        ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context)>,
-    pub set_text_bg_default_bright:
-        ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context)>,
-    pub move_character: ::core::option::Option<
-        unsafe extern "C" fn(
-            arg1: *mut flanterm_context,
-            new_x: usize,
-            new_y: usize,
-            old_x: usize,
-            old_y: usize,
-        ),
-    >,
-    pub scroll: ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context)>,
-    pub revscroll: ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context)>,
-    pub swap_palette: ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context)>,
-    pub save_state: ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context)>,
-    pub restore_state: ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context)>,
-    pub double_buffer_flush:
-        ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context)>,
-    pub full_refresh: ::core::option::Option<unsafe extern "C" fn(arg1: *mut flanterm_context)>,
-    pub deinit: ::core::option::Option<
-        unsafe extern "C" fn(
-            arg1: *mut flanterm_context,
-            arg2: ::core::option::Option<
-                unsafe extern "C" fn(arg1: *mut ::core::ffi::c_void, arg2: usize),
-            >,
-        ),
-    >,
-    pub callback: ::core::option::Option<
-        unsafe extern "C" fn(
-            arg1: *mut flanterm_context,
-            arg2: u64,
-            arg3: u64,
-            arg4: u64,
-            arg5: u64,
-        ),
-    >,
-}
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of flanterm_context"][::core::mem::size_of::<flanterm_context>() - 432usize];
-    ["Alignment of flanterm_context"][::core::mem::align_of::<flanterm_context>() - 8usize];
-    ["Offset of field: flanterm_context::tab_size"]
-        [::core::mem::offset_of!(flanterm_context, tab_size) - 0usize];
-    ["Offset of field: flanterm_context::autoflush"]
-        [::core::mem::offset_of!(flanterm_context, autoflush) - 8usize];
-    ["Offset of field: flanterm_context::cursor_enabled"]
-        [::core::mem::offset_of!(flanterm_context, cursor_enabled) - 9usize];
-    ["Offset of field: flanterm_context::scroll_enabled"]
-        [::core::mem::offset_of!(flanterm_context, scroll_enabled) - 10usize];
-    ["Offset of field: flanterm_context::control_sequence"]
-        [::core::mem::offset_of!(flanterm_context, control_sequence) - 11usize];
-    ["Offset of field: flanterm_context::escape"]
-        [::core::mem::offset_of!(flanterm_context, escape) - 12usize];
-    ["Offset of field: flanterm_context::osc"]
-        [::core::mem::offset_of!(flanterm_context, osc) - 13usize];
-    ["Offset of field: flanterm_context::osc_escape"]
-        [::core::mem::offset_of!(flanterm_context, osc_escape) - 14usize];
-    ["Offset of field: flanterm_context::rrr"]
-        [::core::mem::offset_of!(flanterm_context, rrr) - 15usize];
-    ["Offset of field: flanterm_context::discard_next"]
-        [::core::mem::offset_of!(flanterm_context, discard_next) - 16usize];
-    ["Offset of field: flanterm_context::bold"]
-        [::core::mem::offset_of!(flanterm_context, bold) - 17usize];
-    ["Offset of field: flanterm_context::bg_bold"]
-        [::core::mem::offset_of!(flanterm_context, bg_bold) - 18usize];
-    ["Offset of field: flanterm_context::reverse_video"]
-        [::core::mem::offset_of!(flanterm_context, reverse_video) - 19usize];
-    ["Offset of field: flanterm_context::dec_private"]
-        [::core::mem::offset_of!(flanterm_context, dec_private) - 20usize];
-    ["Offset of field: flanterm_context::insert_mode"]
-        [::core::mem::offset_of!(flanterm_context, insert_mode) - 21usize];
-    ["Offset of field: flanterm_context::code_point"]
-        [::core::mem::offset_of!(flanterm_context, code_point) - 24usize];
-    ["Offset of field: flanterm_context::unicode_remaining"]
-        [::core::mem::offset_of!(flanterm_context, unicode_remaining) - 32usize];
-    ["Offset of field: flanterm_context::g_select"]
-        [::core::mem::offset_of!(flanterm_context, g_select) - 40usize];
-    ["Offset of field: flanterm_context::charsets"]
-        [::core::mem::offset_of!(flanterm_context, charsets) - 41usize];
-    ["Offset of field: flanterm_context::current_charset"]
-        [::core::mem::offset_of!(flanterm_context, current_charset) - 48usize];
-    ["Offset of field: flanterm_context::escape_offset"]
-        [::core::mem::offset_of!(flanterm_context, escape_offset) - 56usize];
-    ["Offset of field: flanterm_context::esc_values_i"]
-        [::core::mem::offset_of!(flanterm_context, esc_values_i) - 64usize];
-    ["Offset of field: flanterm_context::saved_cursor_x"]
-        [::core::mem::offset_of!(flanterm_context, saved_cursor_x) - 72usize];
-    ["Offset of field: flanterm_context::saved_cursor_y"]
-        [::core::mem::offset_of!(flanterm_context, saved_cursor_y) - 80usize];
-    ["Offset of field: flanterm_context::current_primary"]
-        [::core::mem::offset_of!(flanterm_context, current_primary) - 88usize];
-    ["Offset of field: flanterm_context::current_bg"]
-        [::core::mem::offset_of!(flanterm_context, current_bg) - 96usize];
-    ["Offset of field: flanterm_context::scroll_top_margin"]
-        [::core::mem::offset_of!(flanterm_context, scroll_top_margin) - 104usize];
-    ["Offset of field: flanterm_context::scroll_bottom_margin"]
-        [::core::mem::offset_of!(flanterm_context, scroll_bottom_margin) - 112usize];
-    ["Offset of field: flanterm_context::esc_values"]
-        [::core::mem::offset_of!(flanterm_context, esc_values) - 120usize];
-    ["Offset of field: flanterm_context::oob_output"]
-        [::core::mem::offset_of!(flanterm_context, oob_output) - 184usize];
-    ["Offset of field: flanterm_context::saved_state_bold"]
-        [::core::mem::offset_of!(flanterm_context, saved_state_bold) - 192usize];
-    ["Offset of field: flanterm_context::saved_state_bg_bold"]
-        [::core::mem::offset_of!(flanterm_context, saved_state_bg_bold) - 193usize];
-    ["Offset of field: flanterm_context::saved_state_reverse_video"]
-        [::core::mem::offset_of!(flanterm_context, saved_state_reverse_video) - 194usize];
-    ["Offset of field: flanterm_context::saved_state_current_charset"]
-        [::core::mem::offset_of!(flanterm_context, saved_state_current_charset) - 200usize];
-    ["Offset of field: flanterm_context::saved_state_current_primary"]
-        [::core::mem::offset_of!(flanterm_context, saved_state_current_primary) - 208usize];
-    ["Offset of field: flanterm_context::saved_state_current_bg"]
-        [::core::mem::offset_of!(flanterm_context, saved_state_current_bg) - 216usize];
-    ["Offset of field: flanterm_context::rows"]
-        [::core::mem::offset_of!(flanterm_context, rows) - 224usize];
-    ["Offset of field: flanterm_context::cols"]
-        [::core::mem::offset_of!(flanterm_context, cols) - 232usize];
-    ["Offset of field: flanterm_context::raw_putchar"]
-        [::core::mem::offset_of!(flanterm_context, raw_putchar) - 240usize];
-    ["Offset of field: flanterm_context::clear"]
-        [::core::mem::offset_of!(flanterm_context, clear) - 248usize];
-    ["Offset of field: flanterm_context::set_cursor_pos"]
-        [::core::mem::offset_of!(flanterm_context, set_cursor_pos) - 256usize];
-    ["Offset of field: flanterm_context::get_cursor_pos"]
-        [::core::mem::offset_of!(flanterm_context, get_cursor_pos) - 264usize];
-    ["Offset of field: flanterm_context::set_text_fg"]
-        [::core::mem::offset_of!(flanterm_context, set_text_fg) - 272usize];
-    ["Offset of field: flanterm_context::set_text_bg"]
-        [::core::mem::offset_of!(flanterm_context, set_text_bg) - 280usize];
-    ["Offset of field: flanterm_context::set_text_fg_bright"]
-        [::core::mem::offset_of!(flanterm_context, set_text_fg_bright) - 288usize];
-    ["Offset of field: flanterm_context::set_text_bg_bright"]
-        [::core::mem::offset_of!(flanterm_context, set_text_bg_bright) - 296usize];
-    ["Offset of field: flanterm_context::set_text_fg_rgb"]
-        [::core::mem::offset_of!(flanterm_context, set_text_fg_rgb) - 304usize];
-    ["Offset of field: flanterm_context::set_text_bg_rgb"]
-        [::core::mem::offset_of!(flanterm_context, set_text_bg_rgb) - 312usize];
-    ["Offset of field: flanterm_context::set_text_fg_default"]
-        [::core::mem::offset_of!(flanterm_context, set_text_fg_default) - 320usize];
-    ["Offset of field: flanterm_context::set_text_bg_default"]
-        [::core::mem::offset_of!(flanterm_context, set_text_bg_default) - 328usize];
-    ["Offset of field: flanterm_context::set_text_fg_default_bright"]
-        [::core::mem::offset_of!(flanterm_context, set_text_fg_default_bright) - 336usize];
-    ["Offset of field: flanterm_context::set_text_bg_default_bright"]
-        [::core::mem::offset_of!(flanterm_context, set_text_bg_default_bright) - 344usize];
-    ["Offset of field: flanterm_context::move_character"]
-        [::core::mem::offset_of!(flanterm_context, move_character) - 352usize];
-    ["Offset of field: flanterm_context::scroll"]
-        [::core::mem::offset_of!(flanterm_context, scroll) - 360usize];
-    ["Offset of field: flanterm_context::revscroll"]
-        [::core::mem::offset_of!(flanterm_context, revscroll) - 368usize];
-    ["Offset of field: flanterm_context::swap_palette"]
-        [::core::mem::offset_of!(flanterm_context, swap_palette) - 376usize];
-    ["Offset of field: flanterm_context::save_state"]
-        [::core::mem::offset_of!(flanterm_context, save_state) - 384usize];
-    ["Offset of field: flanterm_context::restore_state"]
-        [::core::mem::offset_of!(flanterm_context, restore_state) - 392usize];
-    ["Offset of field: flanterm_context::double_buffer_flush"]
-        [::core::mem::offset_of!(flanterm_context, double_buffer_flush) - 400usize];
-    ["Offset of field: flanterm_context::full_refresh"]
-        [::core::mem::offset_of!(flanterm_context, full_refresh) - 408usize];
-    ["Offset of field: flanterm_context::deinit"]
-        [::core::mem::offset_of!(flanterm_context, deinit) - 416usize];
-    ["Offset of field: flanterm_context::callback"]
-        [::core::mem::offset_of!(flanterm_context, callback) - 424usize];
-};
-unsafe extern "C" {
-    pub fn flanterm_context_reinit(ctx: *mut flanterm_context);
+    _unused: [u8; 0],
 }
 unsafe extern "C" {
     pub fn flanterm_write(
@@ -476,215 +241,53 @@ unsafe extern "C" {
         count: usize,
     );
 }
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct flanterm_fb_char {
-    pub c: u32,
-    pub fg: u32,
-    pub bg: u32,
+unsafe extern "C" {
+    pub fn flanterm_flush(ctx: *mut flanterm_context);
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of flanterm_fb_char"][::core::mem::size_of::<flanterm_fb_char>() - 12usize];
-    ["Alignment of flanterm_fb_char"][::core::mem::align_of::<flanterm_fb_char>() - 4usize];
-    ["Offset of field: flanterm_fb_char::c"][::core::mem::offset_of!(flanterm_fb_char, c) - 0usize];
-    ["Offset of field: flanterm_fb_char::fg"]
-        [::core::mem::offset_of!(flanterm_fb_char, fg) - 4usize];
-    ["Offset of field: flanterm_fb_char::bg"]
-        [::core::mem::offset_of!(flanterm_fb_char, bg) - 8usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct flanterm_fb_queue_item {
-    pub x: usize,
-    pub y: usize,
-    pub c: flanterm_fb_char,
+unsafe extern "C" {
+    pub fn flanterm_full_refresh(ctx: *mut flanterm_context);
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of flanterm_fb_queue_item"][::core::mem::size_of::<flanterm_fb_queue_item>() - 32usize];
-    ["Alignment of flanterm_fb_queue_item"]
-        [::core::mem::align_of::<flanterm_fb_queue_item>() - 8usize];
-    ["Offset of field: flanterm_fb_queue_item::x"]
-        [::core::mem::offset_of!(flanterm_fb_queue_item, x) - 0usize];
-    ["Offset of field: flanterm_fb_queue_item::y"]
-        [::core::mem::offset_of!(flanterm_fb_queue_item, y) - 8usize];
-    ["Offset of field: flanterm_fb_queue_item::c"]
-        [::core::mem::offset_of!(flanterm_fb_queue_item, c) - 16usize];
-};
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct flanterm_fb_context {
-    pub term: flanterm_context,
-    pub plot_char: ::core::option::Option<
-        unsafe extern "C" fn(
-            ctx: *mut flanterm_context,
-            c: *mut flanterm_fb_char,
-            x: usize,
-            y: usize,
-        ),
-    >,
-    pub font_width: usize,
-    pub font_height: usize,
-    pub glyph_width: usize,
-    pub glyph_height: usize,
-    pub font_scale_x: usize,
-    pub font_scale_y: usize,
-    pub offset_x: usize,
-    pub offset_y: usize,
-    pub framebuffer: *mut u32,
-    pub pitch: usize,
-    pub width: usize,
-    pub height: usize,
-    pub bpp: usize,
-    pub red_mask_size: u8,
-    pub red_mask_shift: u8,
-    pub green_mask_size: u8,
-    pub green_mask_shift: u8,
-    pub blue_mask_size: u8,
-    pub blue_mask_shift: u8,
-    pub font_bits_size: usize,
-    pub font_bits: *mut u8,
-    pub font_bool_size: usize,
-    pub font_bool: *mut bool,
-    pub ansi_colours: [u32; 8usize],
-    pub ansi_bright_colours: [u32; 8usize],
-    pub default_fg: u32,
-    pub default_bg: u32,
-    pub default_fg_bright: u32,
-    pub default_bg_bright: u32,
-    pub canvas_size: usize,
-    pub canvas: *mut u32,
-    pub grid_size: usize,
-    pub queue_size: usize,
-    pub map_size: usize,
-    pub grid: *mut flanterm_fb_char,
-    pub queue: *mut flanterm_fb_queue_item,
-    pub queue_i: usize,
-    pub map: *mut *mut flanterm_fb_queue_item,
-    pub text_fg: u32,
-    pub text_bg: u32,
-    pub cursor_x: usize,
-    pub cursor_y: usize,
-    pub saved_state_text_fg: u32,
-    pub saved_state_text_bg: u32,
-    pub saved_state_cursor_x: usize,
-    pub saved_state_cursor_y: usize,
-    pub old_cursor_x: usize,
-    pub old_cursor_y: usize,
+unsafe extern "C" {
+    pub fn flanterm_deinit(
+        ctx: *mut flanterm_context,
+        _free: ::core::option::Option<
+            unsafe extern "C" fn(ptr: *mut ::core::ffi::c_void, size: usize),
+        >,
+    );
 }
-#[allow(clippy::unnecessary_operation, clippy::identity_op)]
-const _: () = {
-    ["Size of flanterm_fb_context"][::core::mem::size_of::<flanterm_fb_context>() - 800usize];
-    ["Alignment of flanterm_fb_context"][::core::mem::align_of::<flanterm_fb_context>() - 8usize];
-    ["Offset of field: flanterm_fb_context::term"]
-        [::core::mem::offset_of!(flanterm_fb_context, term) - 0usize];
-    ["Offset of field: flanterm_fb_context::plot_char"]
-        [::core::mem::offset_of!(flanterm_fb_context, plot_char) - 432usize];
-    ["Offset of field: flanterm_fb_context::font_width"]
-        [::core::mem::offset_of!(flanterm_fb_context, font_width) - 440usize];
-    ["Offset of field: flanterm_fb_context::font_height"]
-        [::core::mem::offset_of!(flanterm_fb_context, font_height) - 448usize];
-    ["Offset of field: flanterm_fb_context::glyph_width"]
-        [::core::mem::offset_of!(flanterm_fb_context, glyph_width) - 456usize];
-    ["Offset of field: flanterm_fb_context::glyph_height"]
-        [::core::mem::offset_of!(flanterm_fb_context, glyph_height) - 464usize];
-    ["Offset of field: flanterm_fb_context::font_scale_x"]
-        [::core::mem::offset_of!(flanterm_fb_context, font_scale_x) - 472usize];
-    ["Offset of field: flanterm_fb_context::font_scale_y"]
-        [::core::mem::offset_of!(flanterm_fb_context, font_scale_y) - 480usize];
-    ["Offset of field: flanterm_fb_context::offset_x"]
-        [::core::mem::offset_of!(flanterm_fb_context, offset_x) - 488usize];
-    ["Offset of field: flanterm_fb_context::offset_y"]
-        [::core::mem::offset_of!(flanterm_fb_context, offset_y) - 496usize];
-    ["Offset of field: flanterm_fb_context::framebuffer"]
-        [::core::mem::offset_of!(flanterm_fb_context, framebuffer) - 504usize];
-    ["Offset of field: flanterm_fb_context::pitch"]
-        [::core::mem::offset_of!(flanterm_fb_context, pitch) - 512usize];
-    ["Offset of field: flanterm_fb_context::width"]
-        [::core::mem::offset_of!(flanterm_fb_context, width) - 520usize];
-    ["Offset of field: flanterm_fb_context::height"]
-        [::core::mem::offset_of!(flanterm_fb_context, height) - 528usize];
-    ["Offset of field: flanterm_fb_context::bpp"]
-        [::core::mem::offset_of!(flanterm_fb_context, bpp) - 536usize];
-    ["Offset of field: flanterm_fb_context::red_mask_size"]
-        [::core::mem::offset_of!(flanterm_fb_context, red_mask_size) - 544usize];
-    ["Offset of field: flanterm_fb_context::red_mask_shift"]
-        [::core::mem::offset_of!(flanterm_fb_context, red_mask_shift) - 545usize];
-    ["Offset of field: flanterm_fb_context::green_mask_size"]
-        [::core::mem::offset_of!(flanterm_fb_context, green_mask_size) - 546usize];
-    ["Offset of field: flanterm_fb_context::green_mask_shift"]
-        [::core::mem::offset_of!(flanterm_fb_context, green_mask_shift) - 547usize];
-    ["Offset of field: flanterm_fb_context::blue_mask_size"]
-        [::core::mem::offset_of!(flanterm_fb_context, blue_mask_size) - 548usize];
-    ["Offset of field: flanterm_fb_context::blue_mask_shift"]
-        [::core::mem::offset_of!(flanterm_fb_context, blue_mask_shift) - 549usize];
-    ["Offset of field: flanterm_fb_context::font_bits_size"]
-        [::core::mem::offset_of!(flanterm_fb_context, font_bits_size) - 552usize];
-    ["Offset of field: flanterm_fb_context::font_bits"]
-        [::core::mem::offset_of!(flanterm_fb_context, font_bits) - 560usize];
-    ["Offset of field: flanterm_fb_context::font_bool_size"]
-        [::core::mem::offset_of!(flanterm_fb_context, font_bool_size) - 568usize];
-    ["Offset of field: flanterm_fb_context::font_bool"]
-        [::core::mem::offset_of!(flanterm_fb_context, font_bool) - 576usize];
-    ["Offset of field: flanterm_fb_context::ansi_colours"]
-        [::core::mem::offset_of!(flanterm_fb_context, ansi_colours) - 584usize];
-    ["Offset of field: flanterm_fb_context::ansi_bright_colours"]
-        [::core::mem::offset_of!(flanterm_fb_context, ansi_bright_colours) - 616usize];
-    ["Offset of field: flanterm_fb_context::default_fg"]
-        [::core::mem::offset_of!(flanterm_fb_context, default_fg) - 648usize];
-    ["Offset of field: flanterm_fb_context::default_bg"]
-        [::core::mem::offset_of!(flanterm_fb_context, default_bg) - 652usize];
-    ["Offset of field: flanterm_fb_context::default_fg_bright"]
-        [::core::mem::offset_of!(flanterm_fb_context, default_fg_bright) - 656usize];
-    ["Offset of field: flanterm_fb_context::default_bg_bright"]
-        [::core::mem::offset_of!(flanterm_fb_context, default_bg_bright) - 660usize];
-    ["Offset of field: flanterm_fb_context::canvas_size"]
-        [::core::mem::offset_of!(flanterm_fb_context, canvas_size) - 664usize];
-    ["Offset of field: flanterm_fb_context::canvas"]
-        [::core::mem::offset_of!(flanterm_fb_context, canvas) - 672usize];
-    ["Offset of field: flanterm_fb_context::grid_size"]
-        [::core::mem::offset_of!(flanterm_fb_context, grid_size) - 680usize];
-    ["Offset of field: flanterm_fb_context::queue_size"]
-        [::core::mem::offset_of!(flanterm_fb_context, queue_size) - 688usize];
-    ["Offset of field: flanterm_fb_context::map_size"]
-        [::core::mem::offset_of!(flanterm_fb_context, map_size) - 696usize];
-    ["Offset of field: flanterm_fb_context::grid"]
-        [::core::mem::offset_of!(flanterm_fb_context, grid) - 704usize];
-    ["Offset of field: flanterm_fb_context::queue"]
-        [::core::mem::offset_of!(flanterm_fb_context, queue) - 712usize];
-    ["Offset of field: flanterm_fb_context::queue_i"]
-        [::core::mem::offset_of!(flanterm_fb_context, queue_i) - 720usize];
-    ["Offset of field: flanterm_fb_context::map"]
-        [::core::mem::offset_of!(flanterm_fb_context, map) - 728usize];
-    ["Offset of field: flanterm_fb_context::text_fg"]
-        [::core::mem::offset_of!(flanterm_fb_context, text_fg) - 736usize];
-    ["Offset of field: flanterm_fb_context::text_bg"]
-        [::core::mem::offset_of!(flanterm_fb_context, text_bg) - 740usize];
-    ["Offset of field: flanterm_fb_context::cursor_x"]
-        [::core::mem::offset_of!(flanterm_fb_context, cursor_x) - 744usize];
-    ["Offset of field: flanterm_fb_context::cursor_y"]
-        [::core::mem::offset_of!(flanterm_fb_context, cursor_y) - 752usize];
-    ["Offset of field: flanterm_fb_context::saved_state_text_fg"]
-        [::core::mem::offset_of!(flanterm_fb_context, saved_state_text_fg) - 760usize];
-    ["Offset of field: flanterm_fb_context::saved_state_text_bg"]
-        [::core::mem::offset_of!(flanterm_fb_context, saved_state_text_bg) - 764usize];
-    ["Offset of field: flanterm_fb_context::saved_state_cursor_x"]
-        [::core::mem::offset_of!(flanterm_fb_context, saved_state_cursor_x) - 768usize];
-    ["Offset of field: flanterm_fb_context::saved_state_cursor_y"]
-        [::core::mem::offset_of!(flanterm_fb_context, saved_state_cursor_y) - 776usize];
-    ["Offset of field: flanterm_fb_context::old_cursor_x"]
-        [::core::mem::offset_of!(flanterm_fb_context, old_cursor_x) - 784usize];
-    ["Offset of field: flanterm_fb_context::old_cursor_y"]
-        [::core::mem::offset_of!(flanterm_fb_context, old_cursor_y) - 792usize];
-};
+unsafe extern "C" {
+    pub fn flanterm_get_dimensions(ctx: *mut flanterm_context, cols: *mut usize, rows: *mut usize);
+}
+unsafe extern "C" {
+    pub fn flanterm_set_autoflush(ctx: *mut flanterm_context, state: bool);
+}
+unsafe extern "C" {
+    pub fn flanterm_set_callback(
+        ctx: *mut flanterm_context,
+        callback: ::core::option::Option<
+            unsafe extern "C" fn(
+                arg1: *mut flanterm_context,
+                arg2: u64,
+                arg3: u64,
+                arg4: u64,
+                arg5: u64,
+            ),
+        >,
+    );
+}
+unsafe extern "C" {
+    pub fn flanterm_get_oob_output(ctx: *mut flanterm_context) -> u64;
+}
+unsafe extern "C" {
+    pub fn flanterm_set_oob_output(ctx: *mut flanterm_context, oob_output: u64);
+}
 unsafe extern "C" {
     pub fn flanterm_fb_init(
         _malloc: ::core::option::Option<
-            unsafe extern "C" fn(arg1: usize) -> *mut ::core::ffi::c_void,
+            unsafe extern "C" fn(size: usize) -> *mut ::core::ffi::c_void,
         >,
         _free: ::core::option::Option<
-            unsafe extern "C" fn(arg1: *mut ::core::ffi::c_void, arg2: usize),
+            unsafe extern "C" fn(ptr: *mut ::core::ffi::c_void, size: usize),
         >,
         framebuffer: *mut u32,
         width: usize,
