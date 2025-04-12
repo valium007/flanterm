@@ -58,3 +58,11 @@ impl Context {
         unsafe { sys::flanterm_write(self.raw.as_ptr(), buf.as_ptr().cast(), buf.len()) }
     }
 }
+
+impl Drop for Context {
+    fn drop(&mut self) {
+        unsafe {
+            sys::flanterm_deinit(self.raw.as_ptr(), None);
+        }
+    }
+}
